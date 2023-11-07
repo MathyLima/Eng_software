@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const connection = require('./connection');
 const routes = require('./routes/routes'); // Verifique o caminho correto para o arquivo de rotas
 const cors = require('cors'); // Importe o módulo cors
 

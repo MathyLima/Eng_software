@@ -42,8 +42,6 @@ class Connection{
         })
     }
 
-    //create
-    //create
 //create
 createRow(tableName, values, callback) {
     this.getTableColumns(tableName, (err, columnNames) => {
@@ -148,8 +146,6 @@ createRow(tableName, values, callback) {
           }
         });
       }
-      
-
 }
 
 //preencha com seu login e senha do SGBD

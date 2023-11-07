@@ -56,7 +56,6 @@ router.post('/api/create_client', (req, res) => {
     quadril_largura,
     quadril_altura,
   ];
-
   connection.createRow('clientes', values, (err, result) => {
     if (err) {
       console.error('Erro ao criar um cliente:', err);
