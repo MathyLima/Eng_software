@@ -1,11 +1,39 @@
+import React from "react";
 import { ResponsivePie } from "@nivo/pie";
-import { tokens } from "../../theme";
 import { useTheme } from "@mui/material";
-import { mockPieData as data } from "../../data/mockData";
+import { tokens } from "../../theme";
 
-const PieChart = () => {
+const PieChart = ({ clientesTotal, clientesIsFlamengo, clientesWatchOnePiece }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+console.log(clientesIsFlamengo)  // Calcula a porcentagem de clientes que são fãs do Flamengo e do One Piece
+  const percentIsFlamengo = (clientesIsFlamengo / clientesTotal) * 100;
+  const percentWatchOnePiece = (clientesWatchOnePiece / clientesTotal) * 100;
+  const percentOther = 100 - percentIsFlamengo - percentWatchOnePiece;
+  console.log([percentIsFlamengo,percentWatchOnePiece,percentOther])
+  // Formata os dados para o componente ResponsivePie
+
+  const data = [
+    {
+      id: "Clientes Flamengo",
+      label: "Clientes Flamengo",
+      value: percentIsFlamengo,
+      color: colors.redAccent[500],
+    },
+    {
+      id: "Clientes One Piece",
+      label: "Clientes One Piece",
+      value: percentWatchOnePiece,
+      color: colors.greenAccent[500],
+    },
+    {
+      id: "Outros",
+      label: "Outros",
+      value: percentOther,
+      color: colors.blueAccent[500],
+    },
+  ];
+
   return (
     <ResponsivePie
       data={data}
@@ -57,51 +85,16 @@ const PieChart = () => {
         from: "color",
         modifiers: [["darker", 2]],
       }}
-      defs={[
-        {
-          id: "dots",
-          type: "patternDots",
-          background: "inherit",
-          color: "rgba(255, 255, 255, 0.3)",
-          size: 4,
-          padding: 1,
-          stagger: true,
-        },
-        {
-          id: "lines",
-          type: "patternLines",
-          background: "inherit",
-          color: "rgba(255, 255, 255, 0.3)",
-          rotation: -45,
-          lineWidth: 6,
-          spacing: 10,
-        },
-      ]}
-      legends={[
-        {
-          anchor: "bottom",
-          direction: "row",
-          justify: false,
-          translateX: 0,
-          translateY: 56,
-          itemsSpacing: 0,
-          itemWidth: 100,
-          itemHeight: 18,
-          itemTextColor: "#999",
-          itemDirection: "left-to-right",
-          itemOpacity: 1,
-          symbolSize: 18,
-          symbolShape: "circle",
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemTextColor: "#000",
-              },
-            },
-          ],
-        },
-      ]}
+      defs={[]}
+      legends={[]} //remover legenda
+      tooltip={({ datum }) => (
+        <div style={{ color: "black", background: "white", padding: "5px", border: "1px solid #ccc" }}>
+          <strong>{datum.label}:</strong> {datum.value.toFixed(2)}%
+        </div>
+      )}
+      
+      
+      
     />
   );
 };

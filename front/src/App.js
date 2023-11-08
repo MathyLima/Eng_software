@@ -6,8 +6,8 @@ import Sidebar from "./views/global/Sidebar"
 import Dashboard from "./views/dashboard/index";
 import Team from "./views/team/index";
 import Invoices from "./views/invoices/index";
-import Contacts from "./views/contacts/index";
-import Form from "./views/form/index";
+import Clientes from "./views/clientes/index";
+import Form from "./views/formClient/index";
 import Calendar from "./views/calendar/index";
 import FAQ from "./views/faq/index";
 // import Bar from "./views/charts/bar/index";
@@ -16,6 +16,8 @@ import Pie from "./views/charts/pie/index";
 import Geography from "./views/charts/geography/index";
 import { useEffect, useState } from "react";
 import { getFullData } from "./utils/fulldata";
+import FormVendedor from "./views/formVendedor";
+
 
 function App() {
   const [theme,colorMode] = useMode();
@@ -30,9 +32,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />}/>
             <Route path="/team" element={<Team/>}/>
-            <Route path="/contacts" element={<Contacts/>}/>
+            <Route path="/clientes" element={<Clientes/>}/>
             <Route path="/invoices" element={<Invoices/>}/>
             <Route path="/form" element={<Form/>}/>
+            <Route path="/formVendedor" element={<FormVendedor/>}/>
             <Route path="/calendar" element={<Calendar/>}/>
             <Route path="/faq" element={<FAQ/>}/>
             {/* <Route path="/bar" element={<Bar data={data}/>}/> */}

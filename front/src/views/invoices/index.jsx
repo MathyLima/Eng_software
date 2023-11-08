@@ -1,8 +1,9 @@
+import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid"; // Certifique-se de que o pacote está atualizado
 import { tokens } from "../../theme";
-import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../Components/Header";
+import { mockDataInvoices } from "../../data/mockData";
 
 const Invoices = () => {
   const theme = useTheme();
@@ -62,6 +63,7 @@ const Invoices = () => {
             backgroundColor: colors.blueAccent[700],
             borderBottom: "none",
           },
+          
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
           },
@@ -74,7 +76,13 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        <DataGrid
+          rows={mockDataInvoices}
+          columns={columns}
+          components={{
+            Toolbar: GridToolbar, // Adicione a GridToolbar como um componente
+          }}
+        />
       </Box>
     </Box>
   );

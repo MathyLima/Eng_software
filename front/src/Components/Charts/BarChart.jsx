@@ -3,13 +3,34 @@ import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../../theme";
 
+const transformDataForChart = (data) => {
+  const chartData = [];
+
+  data.forEach((item) => {
+    const { genero, quantidade, bairro } = item;
+    const existingEntry = chartData.find((entry) => entry.bairro === bairro);
+
+    if (existingEntry) {
+      existingEntry[genero] = quantidade;
+    } else {
+      const newEntry = { bairro };
+      newEntry[genero] = quantidade;
+      chartData.push(newEntry);
+    }
+  });
+
+  return chartData;
+};
+
 const BarChart = ({ isDashboard = false, data }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const chartData = transformDataForChart(data);
+
   return (
     <ResponsiveBar
-      data={data}
+      data={chartData}
       theme={{
         axis: {
           domain: {
@@ -38,15 +59,8 @@ const BarChart = ({ isDashboard = false, data }) => {
           },
         },
       }}
-      keys={[
-        "busto_largura",
-        "busto_altura",
-        "cintura_largura",
-        "cintura_altura",
-        "quadril_largura",
-        "quadril_altura",
-      ]}
-      indexBy="nome_cliente"
+      keys={["genero A", "genero B", "genero C"]}
+      indexBy="bairro"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
@@ -82,7 +96,7 @@ const BarChart = ({ isDashboard = false, data }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "Medidas",
+        legend: isDashboard ? undefined : "Bairro",
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -90,7 +104,7 @@ const BarChart = ({ isDashboard = false, data }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "Valor",
+        legend: isDashboard ? undefined : "Quantidade",
         legendPosition: "middle",
         legendOffset: -40,
       }}

@@ -126,8 +126,8 @@ const SideBar= ()=>{
                                     icon={<PeopleOutlinedIcon/>}
                                     selected={selected}
                                     setSelected={setSelected}/>
-                            <Item title="Contacts Information"
-                                    to="/contacts"
+                            <Item title="Informações Clientes"
+                                    to="/clientes"
                                     icon={<ContactsOutlinedIcon/>}
                                     selected={selected}
                                     setSelected={setSelected}/>
@@ -148,6 +148,11 @@ const SideBar= ()=>{
                                     icon={<PersonOutlinedIcon/>}
                                     selected={selected}
                                     setSelected={setSelected}/>
+                            <Item title="Vendedor Form"
+                                    to="/formVendedor"
+                                    icon={<PersonOutlinedIcon/>}
+                                    selected={selected}
+                                    setSelected={setSelected}/>
                             <Item title="Calendar"
                                     to="/calendar"
                                     icon={<CalendarTodayOutlinedIcon/>}
@@ -159,7 +164,7 @@ const SideBar= ()=>{
                                     selected={selected}
                                     setSelected={setSelected}/>
 
-                            <Typography
+                            {/* <Typography
                                 variant="h6"
                                 color={colors.grey[300]}
                                 sx={{m:"15px 0 5px 20px"}}>Charts</Typography>
@@ -183,7 +188,7 @@ const SideBar= ()=>{
                                     to="/geography"
                                     icon={<MapOutlinedIcon/>}
                                     selected={selected}
-                                    setSelected={setSelected}/>
+                                    setSelected={setSelected}/> */}
                         </Box>
                 </Menu>
             </Sidebar>
