@@ -1,8 +1,6 @@
-import { ColorModeContext,useMode } from "./theme";
-import { CssBaseline,ThemeProvider } from "@mui/material";
-import {Routes, Route} from "react-router-dom"
-import Topbar from "./views/global/Topbar";
-import Sidebar from "./views/global/Sidebar"
+import { ColorModeContext, useMode } from "./theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
 import Dashboard from "./views/dashboard/index";
 import Team from "./views/team/index";
 import Invoices from "./views/invoices/index";
@@ -14,39 +12,51 @@ import FAQ from "./views/faq/index";
 import Line from "./views/charts/line/index";
 import Pie from "./views/charts/pie/index";
 import Geography from "./views/charts/geography/index";
-import { useEffect, useState } from "react";
-import { getFullData } from "./utils/fulldata";
 import FormVendedor from "./views/formVendedor";
-
+import LoginForm from "./views/login";
+import PrivateRoute from "./auth";
 
 function App() {
-  const [theme,colorMode] = useMode();
+  const [theme, colorMode] = useMode();
   return (
-  <ColorModeContext.Provider value={colorMode}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <div className="app">
-        <Sidebar/>
-        <main className="content">
-          <Topbar/>
-          <Routes>
-            <Route path="/" element={<Dashboard />}/>
-            <Route path="/team" element={<Team/>}/>
-            <Route path="/clientes" element={<Clientes/>}/>
-            <Route path="/invoices" element={<Invoices/>}/>
-            <Route path="/form" element={<Form/>}/>
-            <Route path="/formVendedor" element={<FormVendedor/>}/>
-            <Route path="/calendar" element={<Calendar/>}/>
-            <Route path="/faq" element={<FAQ/>}/>
-            {/* <Route path="/bar" element={<Bar data={data}/>}/> */}
-            <Route path="/pie" element={<Pie/>}/>
-            <Route path="/line" element={<Line/>}/>
-            <Route path="/geography" element={<Geography/>}/>
-          </Routes>
-        </main>
-      </div>
-    </ThemeProvider>
-  </ColorModeContext.Provider>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+
+        <Routes>
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/" element={<PrivateRoute children={<Dashboard />} />} />
+          <Route path="/" element={<PrivateRoute children={<Dashboard />} />} />
+          <Route path="/team" element={<PrivateRoute children={<Team />} />} />
+          <Route
+            path="/clientes"
+            element={<PrivateRoute children={<Clientes />} />}
+          />
+          <Route
+            path="/invoices"
+            element={<PrivateRoute children={<Invoices />} />}
+          />
+          <Route path="/form" element={<PrivateRoute children={<Form />} />} />
+          <Route
+            path="/formVendedor"
+            element={<PrivateRoute children={<FormVendedor />} />}
+          />
+          <Route
+            path="/calendar"
+            element={<PrivateRoute children={<Calendar />} />}
+          />
+          <Route path="/faq" element={<PrivateRoute children={<FAQ />} />} />
+          {/* <Route path="/bar" element={<Bar data={data}/>}/> */}
+          <Route path="/" element={<PrivateRoute children={<Dashboard />} />} />
+          <Route path="/pie" element={<PrivateRoute children={<Pie />} />} />
+          <Route path="/line" element={<PrivateRoute children={<Line />} />} />
+          <Route
+            path="/geography"
+            element={<PrivateRoute children={<Geography />} />}
+          />
+        </Routes>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
